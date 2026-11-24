@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""data/ 아래 모든 JSON → site/index.html (폴더 필터 임베드 뷰어).
+"""data/ 아래 모든 JSON → 저장소 루트의 index.html (폴더 필터 임베드 뷰어).
+GitHub Pages가 "main / (root)"에서 바로 서빙할 수 있도록 루트에 생성.
 폴더 = data/<폴더명>/<숏코드>.json 구조. Python 표준 라이브러리만 사용.
 """
 import html
@@ -8,7 +9,7 @@ from pathlib import Path
 from datetime import datetime, timedelta, timezone
 
 KST = timezone(timedelta(hours=9))
-DATA, SITE = Path("data"), Path("site")
+DATA = Path("data")
 DEFAULT_FOLDER = "미분류"
 
 
@@ -146,11 +147,11 @@ chips.forEach(function(ch){{
 </script>
 </body></html>"""
 
-    SITE.mkdir(exist_ok=True)
-    (SITE / "index.html").write_text(page, encoding="utf-8")
-    (SITE / "robots.txt").write_text("User-agent: *\nDisallow: /\n", encoding="utf-8")
+    (Path("index.html")).write_text(page, encoding="utf-8")
+    (Path("robots.txt")).write_text("User-agent: *\nDisallow: /\n", encoding="utf-8")
+    Path(".nojekyll").touch()
     summary = ", ".join(f"{n}:{counts[n]}" for n in folder_names) or "없음"
-    print(f"✅ site/index.html 생성 — 총 {len(posts)}개 (폴더: {summary})")
+    print(f"✅ index.html 생성 — 총 {len(posts)}개 (폴더: {summary})")
 
 
 if __name__ == "__main__":
