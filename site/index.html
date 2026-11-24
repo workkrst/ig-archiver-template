@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow"><title>인스타 아카이브</title><style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0c0d0e;color:#f3f5f7;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;padding:32px 16px}
+.wrap{max-width:720px;margin:0 auto}
+.pagehd{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #2a2b2e;padding-bottom:16px;margin-bottom:16px}
+h1{font-size:24px;font-weight:800}.count{color:#9ba1a6;font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.chip{background:#18191b;border:1px solid #2a2b2e;color:#c9ccd1;border-radius:18px;padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer}
+.chip:hover{border-color:#3b3d42;color:#fff}
+.chip.active{background:linear-gradient(135deg,#e1306c,#f77737);border-color:transparent;color:#fff}
+.card{background:#18191b;border:1px solid #2a2b2e;border-radius:12px;padding:20px;margin-bottom:20px}
+.card:hover{border-color:#3b3d42}
+.chead{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.card a{color:#f3f5f7;font-weight:700;text-decoration:none}
+.card a:hover{text-decoration:underline}
+.badge,.folder-tag{background:#26272b;color:#9ba1a6;border-radius:10px;padding:1px 9px;font-size:11.5px}
+.dt,.saved,.d{color:#9ba1a6;font-size:12px}.saved{margin-left:auto}
+iframe{display:block;background:#fff;border-radius:6px;max-width:540px;margin:0 auto 12px}
+details{border-top:1px solid #2a2b2e;padding-top:10px;margin-bottom:10px;font-size:13.5px}
+summary{cursor:pointer;color:#9ba1a6;font-size:12.5px}summary:hover{color:#fff}
+.cap{white-space:pre-wrap;color:#d8dade;margin-top:8px}
+.cmts{margin:8px 0 0 18px}.cmts li{margin-bottom:4px;color:#d8dade}
+.ft{display:flex;justify-content:space-between;align-items:center;color:#9ba1a6;font-size:13px;gap:10px}
+.btn{color:#fff!important;background:linear-gradient(135deg,#e1306c,#f77737);border-radius:9px;padding:7px 14px;font-size:13px;text-decoration:none}
+.empty{text-align:center;color:#9ba1a6;padding:60px 0}
+.foot{margin-top:36px;text-align:center;color:#6b7076;font-size:11.5px;border-top:1px solid #2a2b2e;padding-top:14px}
+@media(max-width:600px){.ft{flex-direction:column;align-items:flex-start;gap:8px}.saved{margin-left:0}}
+</style></head><body><div class="wrap">
+<div class="pagehd"><h1>◎ 인스타 아카이브</h1><span class="count">0개 저장</span></div>
+<div class="chips" id="chips">
+<button class="chip active" data-f="__all__">전체 0</button>
+</div>
+<div class='empty'>아직 저장된 게시물이 없습니다.<br>Actions에서 Run workflow로 첫 게시물을 저장해 보세요!</div>
+<div class="foot">임베드는 인스타 원본 실시간 표시 — 원본 삭제 시 해당 카드는 빈 화면<br>Generated with Claude · noindex</div>
+</div>
+<script>
+var chips = document.querySelectorAll('.chip');
+var cards = document.querySelectorAll('.card');
+chips.forEach(function(ch){
+  ch.addEventListener('click', function(){
+    chips.forEach(function(c){c.classList.remove('active')});
+    ch.classList.add('active');
+    var f = ch.getAttribute('data-f');
+    cards.forEach(function(card){
+      card.style.display = (f === '__all__' || card.getAttribute('data-folder') === f) ? '' : 'none';
+    });
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+});
+</script>
+</body></html>
